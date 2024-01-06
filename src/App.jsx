@@ -14,7 +14,7 @@ const Layout = (props) => {
   )
 }
 
-const OfertaILimitada = () => {
+const OfertaLimitada = () => {
   const [vuelta, setVuelta] = useState(20)
   const [horas, setHoras] = useState(13)
   const [minutos, setMinutos] = useState(30)
@@ -43,7 +43,7 @@ const OfertaILimitada = () => {
   useEffect (() => {
     if(segundos === 0) {
       setSegundos(0)
-      setMinutos(prev => prev - 1)
+      setMinutos(prev => prev + 1)
     }
   }, {segundos})
 
@@ -93,7 +93,7 @@ function App() {
         <p>Agrega al carrito para iniciar una compra</p>
         <button>Comprar</button>
       </Layout>
-      <OfertaILimitada />
+      <OfertaLimitada />
       
     </>
   )
