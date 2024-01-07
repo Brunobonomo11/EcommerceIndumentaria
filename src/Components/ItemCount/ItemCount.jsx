@@ -1,24 +1,14 @@
-import { useState } from 'react'
+import { useCount } from "../../hooks/useCount"
 
-const ItemCount = () => {
+const ItemCount = ({ initialValue, incrementBy}) => {
 
-    const [count, setCount] = useState()
-    console.log(count)
-
-    const decrement = () => {
-        if(count > 1)
-            setCount(count - 1)
-    }
-
-    const increment = () => {
-        setCount(count + 1)
-    }
+    const {count, decrement, increment} = useCount(initialValue, incrementBy)
 
     return (
         <div>
             <h1>{count}</h1>
             <button onClick={decrement}>Decrementar</button>
-            <button onClick={() => setCount(0)}>Reiniciar</button>
+            <button onClick={() => setCount(initialValue)}>Reiniciar</button>
             <button onClick={increment}>Incrementar</button>
         </div>
     )
