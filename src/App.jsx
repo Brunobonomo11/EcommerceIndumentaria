@@ -1,11 +1,14 @@
 import Navbar from './Components/Navbar/Navbar'
+import ItemListContainer from './Components/ItemListContainer/ItemListContainer'
+import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Button from './Components/Button/Button'
 import ItemCount from './Components/ItemCount/ItemCount'
-import ItemListContainer from './Components/ItemListContainer/ItemListContainer'
 import { useEffect, useState } from 'react'
 import MercadoLibre from './Components/Mercado Libre/MercadoLibre'
 import FormWithValidationHOC from './Components/FormWithValidationHOC/FormWithValidationHOC'
 import TaskFilterRenderProps from './Components/TaskFilterRenderProps/TaskFilterRenderProps'
+
 
 const Layout = (props) => {
   console.log(props)
@@ -73,15 +76,27 @@ const OfertaLimitada = () => {
 
 }
 
-function App() {
+const App = () => {
 
   return (
     <>
-      <div>
-      <Navbar />
-      </div>
-      <ItemListContainer greeting={'Bienvenidos al mejor Ecommerce de Indumentaria'}/>
-      <h1>Ecommerce Indumentaria</h1>
+      <BrowserRouter>
+        <Navbar />
+        <div>
+          <Link to='/'>
+            Listado
+          </Link>
+          <Link to='/detail'>
+            Detalle
+          </Link>
+        </div>
+        <Routes>
+          <Route path='/' element={<ItemListContainer greeting={'Bienvenidos al mejor Ecommerce de Indumentaria'}/>}/>
+          <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos Filtrados'}/>}/>
+          <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
+          <Route path='*' element={<h1>404 Not Found</h1>}/>
+        </Routes>
+      </BrowserRouter>
       <Button text={'Buzos'} color={'black'} callback={() => console.log('Click en Buzos')}/>
       <Button text={'Remeras'} color={'black'} callback={() => console.log('Click en Remeras')}/>
       <Button text={'Pantalones'} color={'black'} callback={() => console.log('Click en Pantalones')}/>
