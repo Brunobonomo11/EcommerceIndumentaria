@@ -3,7 +3,6 @@ import ItemListContainer from './Components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Button from './Components/Button/Button'
-import ItemCount from './Components/ItemCount/ItemCount'
 import { useEffect, useState } from 'react'
 import MercadoLibre from './Components/Mercado Libre/MercadoLibre'
 import FormWithValidationHOC from './Components/FormWithValidationHOC/FormWithValidationHOC'
@@ -100,7 +99,6 @@ const App = () => {
       <Button text={'Buzos'} color={'black'} callback={() => console.log('Click en Buzos')}/>
       <Button text={'Remeras'} color={'black'} callback={() => console.log('Click en Remeras')}/>
       <Button text={'Pantalones'} color={'black'} callback={() => console.log('Click en Pantalones')}/>
-      <ItemCount initialValue={0} incrementBy={2}/>
       <FormWithValidationHOC />
       <Layout title={'Sección temporada de Verano'} color='gold'>
         <p>Elegí el traje de baño o malla que mejor se adapte a vos</p>
