@@ -3,6 +3,7 @@ import Button from './Components/Button/Button'
 import ItemCount from './Components/ItemCount/ItemCount'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer'
 import { useEffect, useState } from 'react'
+import MercadoLibre from './Components/Mercado Libre/MercadoLibre'
 
 const Layout = (props) => {
   console.log(props)
@@ -24,7 +25,7 @@ const OfertaLimitada = () => {
     document.title = `Vuelta:${vuelta}`
 
     return () => {
-      document.title = `Vite + React`
+      document.title = `Ecommerce Indumentaria`
     }
   }, [vuelta])
 
@@ -94,6 +95,7 @@ function App() {
         <button>Comprar</button>
       </Layout>
       <OfertaLimitada />
+      <MercadoLibre />
       
     </>
   )
