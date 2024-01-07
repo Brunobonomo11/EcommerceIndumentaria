@@ -5,6 +5,7 @@ import ItemListContainer from './Components/ItemListContainer/ItemListContainer'
 import { useEffect, useState } from 'react'
 import MercadoLibre from './Components/Mercado Libre/MercadoLibre'
 import FormWithValidationHOC from './Components/FormWithValidationHOC/FormWithValidationHOC'
+import TaskFilterRenderProps from './Components/TaskFilterRenderProps/TaskFilterRenderProps'
 
 const Layout = (props) => {
   console.log(props)
@@ -96,6 +97,7 @@ function App() {
         <p>Agrega al carrito para iniciar una compra</p>
         <button>Comprar</button>
       </Layout>
+      <TaskFilterRenderProps />
       <OfertaLimitada />
       <MercadoLibre />
       
