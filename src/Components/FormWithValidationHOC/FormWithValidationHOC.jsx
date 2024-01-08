@@ -6,10 +6,10 @@ const withFormValidation = (WrappedComponent) => {
 
         const validateForm = () => {
             const newErrors = {}
-            if(!props.formData.nombre) {
+            if(!props.formdata.nombre) {
                 newErrors.nombre = 'El nombre es requerido'
             }
-            if(!props.formData.email) {
+            if(!props.formdata.email) {
                 newErrors.email = 'El email es requerido'
         }
 
@@ -27,7 +27,7 @@ const withFormValidation = (WrappedComponent) => {
     return WithFormValidation
 }
 
-const Form = ({ formData, errors, validateForm, onChange}) => {
+const Form = ({ formdata, errors, validateForm, onChange}) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         validateForm && validateForm()
@@ -37,12 +37,12 @@ const Form = ({ formData, errors, validateForm, onChange}) => {
         <form onSubmit={handleSubmit}>
         <div>
             <label>Nombre:</label>
-            <input type="text" name="nombre" value={formData.nombre} onChange={(e) => onChange(e)} />
+            <input type="text" name="nombre" value={formdata.nombre} onChange={(e) => onChange(e)} />
             {errors && errors.nombre && <div>{errors.nombre}</div>}
         </div>
         <div>
             <label>Email:</label>
-            <input type="email" name="email" value={formData.email} onChange={(e) => onChange(e)} />
+            <input type="email" name="email" value={formdata.email} onChange={(e) => onChange(e)} />
             {errors && errors.email && <div>{errors.email}</div>}
         </div>
         <button type="submit">Enviar</button>
@@ -53,22 +53,22 @@ const Form = ({ formData, errors, validateForm, onChange}) => {
 const FormWithValidation = withFormValidation(Form)
 
 const FormWithValidationHOC = () => {
-    const [formData, setFormData] = useState({
+    const [formdata, setFormData] = useState({
         nombre: '',
         email: ''
     })
 
     const handleChange = (event) => {
         setFormData({
-            ...formData,
+            ...formdata,
             [event.target.name]: event.target.value
         })
     }
 
     return (
         <div>
-            <FormWithValidation formData={formData} onChange={handleChange} />
-            <form formData={formData} onChange={handleChange}/>
+            <FormWithValidation formdata={formdata} onChange={handleChange} />
+            <form formdata={formdata} onChange={handleChange}/>
         </div>
     )
 }

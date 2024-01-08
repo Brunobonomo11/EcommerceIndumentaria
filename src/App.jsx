@@ -95,10 +95,8 @@ const App = () => {
           <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
           <Route path='*' element={<h1>404 Not Found</h1>}/>
         </Routes>
+        <Button />
       </BrowserRouter>
-      <Button text={'Buzos'} color={'black'} callback={() => console.log('Click en Buzos')}/>
-      <Button text={'Remeras'} color={'black'} callback={() => console.log('Click en Remeras')}/>
-      <Button text={'Pantalones'} color={'black'} callback={() => console.log('Click en Pantalones')}/>
       <FormWithValidationHOC />
       <Layout title={'Sección temporada de Verano'} color='gold'>
         <p>Elegí el traje de baño o malla que mejor se adapte a vos</p>
