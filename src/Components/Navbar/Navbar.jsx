@@ -1,6 +1,5 @@
 import classes from './Navbar.module.css'
 import { Link, useNavigate } from 'react-router-dom'
-import CartWidget from '../CartWidget/CartWidget'
 
 const Navbar = () => {
 
@@ -14,7 +13,6 @@ const Navbar = () => {
                 <Link to='/category/remeras' className={classes.boton}>Remeras</Link>
                 <Link to='/category/pantalones' className={classes.boton}>Pantalones</Link>
             </section>
-            <CartWidget />
         </nav>
     )
 }

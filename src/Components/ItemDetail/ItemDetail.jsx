@@ -49,9 +49,9 @@ const ItemDetail = ({id, name, category, img, stock, price, description}) => {
 
     const ItemCount = inputType === 'input' ? InputCount : ButtonCount
 
-    const handleOnAdd = (quantity) => {
+    const handleOnAdd = (count) => {
         const objProducToadd = {
-            id, name, price, quantity
+            id, name, price, count
         }
         addItem(objProducToadd)
         console.log('agregue al carrito: ', count)
