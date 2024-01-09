@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { Context } from "../../App"
+import { CartContext } from "../../context/CartContext"
 
 const InputCount = ({onAdd, stock, initial= 1}) => {
     const [count, setCount] = useState(initial)
@@ -44,14 +44,14 @@ const ButtonCount = ({onAdd, stock, initial = 1}) => {
 const ItemDetail = ({id, name, category, img, stock, price, description}) => {
     const [inputType, setInputType] = useState('button')
 
-    const {addItem, isInCart} = useContext(Context)
+    const {addItem, isInCart} = useContext(CartContext)
     
 
     const ItemCount = inputType === 'input' ? InputCount : ButtonCount
 
-    const handleOnAdd = (count) => {
+    const handleOnAdd = (quantity) => {
         const objProducToadd = {
-            id, name, price, count
+            id, name, price, quantity
         }
         addItem(objProducToadd)
         console.log('agregue al carrito: ', count)

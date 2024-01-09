@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './Components/Navbar/Navbar'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer'
@@ -7,6 +7,7 @@ import Button from './Components/Button/Button'
 import MercadoLibre from './Components/Mercado Libre/MercadoLibre'
 import FormWithValidationHOC from './Components/FormWithValidationHOC/FormWithValidationHOC'
 import TaskFilterRenderProps from './Components/TaskFilterRenderProps/TaskFilterRenderProps'
+import { CartProvider } from './context/CartContext'
 
 
 const Layout = (props) => {
@@ -75,33 +76,12 @@ const OfertaLimitada = () => {
 
 }
 
- export const Context = createContext({
-  cart: [],
-  addItem: () => {},
-  isInCart: () => {}
- })
-
 const App = () => {
-   const [cart, setCart] = useState([])
-   console.log(cart)
-
-   const addItem = (productToAdd) => {
-    if(!isInCart(productToAdd.id)) {
-        setCart(prev => [...prev, productToAdd])
-     } else {
-        console.error("El producto ya esta agregado")
-     }
-
-   }
-
-   const isInCart = (productId) => {
-      return cart.some(prod => prod.id === productId)
-   }
-
+  
   return (
     <>
       <BrowserRouter>
-      <Context.Provider value={{cart, isInCart, addItem}}>
+        <CartProvider>
           <Navbar />
           <div>
             <Link to='/'>
@@ -118,7 +98,7 @@ const App = () => {
             <Route path='*' element={<h1>404 Not Found</h1>}/>
           </Routes>
           <Button />
-        </Context.Provider>
+        </CartProvider>
       </BrowserRouter>
       <FormWithValidationHOC />
       <Layout title={'Sección temporada de Verano'} color='gold'>
