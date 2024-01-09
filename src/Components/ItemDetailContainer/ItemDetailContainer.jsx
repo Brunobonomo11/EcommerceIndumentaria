@@ -13,6 +13,10 @@ const ItemDetailContainer = () => {
             .then(response => {
                 setProduct(response)
             })
+            .catch(error => {
+                console.log(error)
+                console.log('Hubo un error obteniendo los productos, intente nuevamente en unos minutos');
+            })
     }, [productId])
 
     return (

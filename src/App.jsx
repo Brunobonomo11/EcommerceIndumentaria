@@ -8,6 +8,7 @@ import MercadoLibre from './Components/Mercado Libre/MercadoLibre'
 import FormWithValidationHOC from './Components/FormWithValidationHOC/FormWithValidationHOC'
 import TaskFilterRenderProps from './Components/TaskFilterRenderProps/TaskFilterRenderProps'
 import { CartProvider } from './context/CartContext'
+import { NotificationProvider} from './Components/notification/NotificationService'
 
 
 const Layout = (props) => {
@@ -80,26 +81,28 @@ const App = () => {
   
   return (
     <>
-      <BrowserRouter>
-        <CartProvider>
-          <Navbar />
-          <div>
-            <Link to='/'>
-              Listado
-            </Link>
-            <Link to='/detail'>
-              Detalle
-            </Link>
-          </div>
-          <Routes>
-            <Route path='/' element={<ItemListContainer greeting={'Bienvenidos al mejor Ecommerce de Indumentaria'}/>}/>
-            <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos Filtrados'}/>}/>
-            <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
-            <Route path='*' element={<h1>404 Not Found</h1>}/>
-          </Routes>
-          <Button />
-        </CartProvider>
-      </BrowserRouter>
+      <NotificationProvider>
+        <BrowserRouter>
+          <CartProvider>
+            <Navbar />
+            <div>
+              <Link to='/'>
+                Listado
+              </Link>
+              <Link to='/detail'>
+                Detalle
+              </Link>
+            </div>
+            <Routes>
+              <Route path='/' element={<ItemListContainer greeting={'Bienvenidos al mejor Ecommerce de Indumentaria'}/>}/>
+              <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos Filtrados'}/>}/>
+              <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
+              <Route path='*' element={<h1>404 Not Found</h1>}/>
+            </Routes>
+            <Button />
+          </CartProvider>
+        </BrowserRouter>
+      </NotificationProvider>
       <FormWithValidationHOC />
       <Layout title={'Sección temporada de Verano'} color='gold'>
         <p>Elegí el traje de baño o malla que mejor se adapte a vos</p>
