@@ -1,23 +1,48 @@
 import { useEffect, useState } from "react"
-import { getProductById } from "../../asyncMock"
+// import { getProductById } from "../../asyncMock"
 import { useParams } from "react-router-dom"
 import ItemDetail from "../ItemDetail/ItemDetail"
+import { getDoc, doc} from "firebase/firestore"
+import { QueryDocumentSnapshot } from "firebase/firestore"
+import { db } from "../../Services/firebase/firebaseConfig"
 
 const ItemDetailContainer = () => {
+    const [loading, setLoading] = useState(true)
     const [product, setProduct] = useState(null)
 
     const { productId } = useParams()
 
     useEffect(() => {
-        getProductById(productId)
-            .then(response => {
-                setProduct(response)
+        setLoading(true)
+
+        const documentRef = doc(db, 'products', productId)
+
+        getDoc(documentRef)
+            .then(queryDocumentSnapshot => {
+                const fields = queryDocumentSnapshot.data()
+                const productAdapted = {id: queryDocumentSnapshot.id, ...fields}
+                setProduct(productAdapted)
             })
             .catch(error => {
                 console.log(error)
-                console.log('Hubo un error obteniendo los productos, intente nuevamente en unos minutos');
             })
+            .finally(() => {
+                setLoading(false)
+            })
+
+        // getProductById(productId)
+        //     .then(response => {
+        //         setProduct(response)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //         console.log('Hubo un error obteniendo los productos, intente nuevamente en unos minutos');
+        //     })
     }, [productId])
+
+    if(loading) {
+        return <h1>Loading...</h1>
+    }
 
     return (
         <>

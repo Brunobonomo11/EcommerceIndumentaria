@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
-import { getProducts, getProductsByCategory } from "../../asyncMock"
+// import { getProducts, getProductsByCategory } from "../../asyncMock"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
+import { getDocs, collection, QuerySnapshot, query, where } from "firebase/firestore"
+import { db } from "../../Services/firebase/firebaseConfig"
 
 const ItemListContainer = ({ greeting }) => {
     const [loading, setLoading] = useState(true)
@@ -12,11 +14,21 @@ const ItemListContainer = ({ greeting }) => {
     useEffect(() => {
         setLoading(true)
 
-        const asyncFuntion = categoryId ? getProductsByCategory : getProducts
+        const collectionRef = categoryId 
+        ? query(collection(db, 'products'), where('category', '==', categoryId))
+        : collection(db, 'products')
 
-        asyncFuntion(categoryId)
-            .then(response => {
-                setProducts(response)
+        getDocs(collectionRef)
+            .then(querySnapshot => {
+                console.log(querySnapshot)
+
+                const productsAdapted = querySnapshot.docs.map(doc => {
+                    const fields = doc.data()
+                    
+                    return {id: doc.id, ...fields}
+                })
+
+                setProducts(productsAdapted)
             })
             .catch(error => {
                 console.log(error)
@@ -24,6 +36,21 @@ const ItemListContainer = ({ greeting }) => {
             .finally(() => {
                 setLoading(false)
             })
+
+        // setLoading(true)
+
+        // const asyncFuntion = categoryId ? getProductsByCategory : getProducts
+
+        // asyncFuntion(categoryId)
+        //     .then(response => {
+        //         setProducts(response)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        //     .finally(() => {
+        //         setLoading(false)
+        //     })
     }, [categoryId])
     console.log(products) 
 
