@@ -6,16 +6,18 @@ export const Notification = ({notificationData}) => {
         position: 'absolute',
         top: 100,
         right: 30,
-        backgroundColor: 'green',
+        backgroundColor: notificationData.type === 'success' ? 'green' : notificationData.type === 'error' ? 'red' : 'blue',
         color: 'white',
         padding: 20,
         borderRadius: 15,
-        fontSize: 20
     }
 
     return (
         <div style={notificationStyles}>
-            {notificationData.text}
+            <h3>
+                {notificationData.type === 'success' ? 'Success' : 'Error'}
+            </h3>
+            <p> {notificationData.text} </p>
         </div>
     )
 }
@@ -25,7 +27,7 @@ const NotificationContext = createContext()
 export const NotificationProvider = ({children}) => {
 
     const [notificationData, setNotificationData] = useState({
-        text: 'esto es un mensaje',
+        text: '',
         type: 'success'
     })
 
@@ -33,11 +35,15 @@ export const NotificationProvider = ({children}) => {
         setNotificationData({
             text, type
         })
+
+        setTimeout(() => {
+            setNotificationData(prev => ({...prev, text: ''}))
+        }, 2000)
     }
 
     return (
         <NotificationContext.Provider value={{showNotification}}>
-            <Notification notificationData={notificationData}/>
+            {notificationData.text && <Notification notificationData={notificationData}/>}
             {children}
         </NotificationContext.Provider>
     )
