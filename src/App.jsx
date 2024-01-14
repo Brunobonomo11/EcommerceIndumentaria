@@ -94,10 +94,10 @@ const App = () => {
               </Link>
             </div>
             <Routes>
-              <Route path='/' element={<ItemListContainer greeting={'Bienvenidos al mejor Ecommerce de Indumentaria'}/>}/>
-              <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos Filtrados'}/>}/>
-              <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
-              <Route path='*' element={<h1>404 Not Found</h1>}/>
+                  <Route path='/' element={<ItemListContainer greeting={'Bienvenidos al mejor Ecommerce de Indumentaria'}/>}/>
+                  <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos Filtrados'}/>}/>
+                  <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
+                  <Route path='*' element={<h1>404 Not Found</h1>}/>
             </Routes>
             <Button />
           </CartProvider>
