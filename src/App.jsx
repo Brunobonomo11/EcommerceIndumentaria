@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Navbar from './Components/Navbar/Navbar'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer'
+import CartView from './Components/CartView/CartView'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Button from './Components/Button/Button'
 import MercadoLibre from './Components/Mercado Libre/MercadoLibre'
@@ -110,6 +111,7 @@ const App = () => {
                   <Route path='/' element={<ItemListContainer greeting={'Bienvenidos al mejor Ecommerce de Indumentaria'}/>}/>
                   <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos Filtrados'}/>}/>
                   <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
+                  <Route path='/cart' element={<CartView />}/>
                   <Route path='*' element={<h1>404 Not Found</h1>}/>
             </Routes>
             <Button />

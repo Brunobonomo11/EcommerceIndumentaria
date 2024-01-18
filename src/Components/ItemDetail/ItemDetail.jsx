@@ -44,6 +44,7 @@ const ButtonCount = ({onAdd, stock, initial = 1}) => {
 
 const ItemDetail = ({id, name, category, img, stock, price, description}) => {
     const [inputType, setInputType] = useState('button')
+    const [quantity, setQuantity] = useState(0)
 
     const {isInCart} = useCart()
 
@@ -52,9 +53,9 @@ const ItemDetail = ({id, name, category, img, stock, price, description}) => {
 
     const ItemCount = inputType === 'input' ? InputCount : ButtonCount
 
-    const handleOnAdd = (quantity) => {
+    const handleOnAdd = (count) => {
         const objProducToadd = {
-            id, name, price, quantity
+            id, name, price, count
         }
         console.log(objProducToadd) 
         showNotification('success', `Se agrego correctamente ${name}`)
@@ -91,7 +92,7 @@ const ItemDetail = ({id, name, category, img, stock, price, description}) => {
                     !isInCart(id) ? (
                         <ItemCount onAdd={handleOnAdd} stock={stock} />
                     ) : (
-                        <Link to='/cart'>Finalizar Compra</Link>
+                        <button>Finalizar Compra</button> 
                     )
                 }
             </footer>
