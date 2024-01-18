@@ -1,5 +1,5 @@
-import { useState, useContext } from "react"
-import { CartContext } from "../../context/CartContext"
+import { useState } from "react"
+import { useCart } from "../../context/CartContext"
 import { useNotification } from "../notification/NotificationService"
 
 const InputCount = ({onAdd, stock, initial= 1}) => {
@@ -45,18 +45,18 @@ const ButtonCount = ({onAdd, stock, initial = 1}) => {
 const ItemDetail = ({id, name, category, img, stock, price, description}) => {
     const [inputType, setInputType] = useState('button')
 
-    const {addItem, isInCart} = useContext(CartContext)
+    const {isInCart} = useCart()
 
     const {showNotification} = useNotification()
     
 
     const ItemCount = inputType === 'input' ? InputCount : ButtonCount
 
-    const handleOnAdd = (count) => {
+    const handleOnAdd = (quantity) => {
         const objProducToadd = {
-            id, name, price, count
+            id, name, price, quantity
         }
-        addItem(objProducToadd)
+        console.log(objProducToadd) 
         showNotification('success', `Se agrego correctamente ${name}`)
 
     }
@@ -91,7 +91,7 @@ const ItemDetail = ({id, name, category, img, stock, price, description}) => {
                     !isInCart(id) ? (
                         <ItemCount onAdd={handleOnAdd} stock={stock} />
                     ) : (
-                        <button>Finalizar Compra</button>
+                        <Link to='/cart'>Finalizar Compra</Link>
                     )
                 }
             </footer>

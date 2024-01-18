@@ -78,6 +78,19 @@ const OfertaLimitada = () => {
 }
 
 const App = () => {
+
+  // const [cart, setCart] = useState([])
+  // console.log(cart)
+
+  // const addItem = (productToAdd) => {
+  //   if(!isInCart(productToAdd.id)) {
+  //     setCart(prev => [...prev, productToAdd]);
+  //   }
+  // }
+
+  // const isInCart = (productId) => {
+  //   return cart.some(prod => prod.id === productId)
+  // }
   
   return (
     <>
