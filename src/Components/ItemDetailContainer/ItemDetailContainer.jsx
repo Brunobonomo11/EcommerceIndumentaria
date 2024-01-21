@@ -5,6 +5,7 @@ import ItemDetail from "../ItemDetail/ItemDetail"
 import { getDoc, doc} from "firebase/firestore"
 import { QueryDocumentSnapshot } from "firebase/firestore"
 import { db } from "../../Services/firebase/firebaseConfig"
+import { createProductsAdaptedFromFirestore } from "../../adaptes/createProductsAdaptedFromFirestore"
 
 const ItemDetailContainer = () => {
     const [loading, setLoading] = useState(true)
@@ -19,8 +20,7 @@ const ItemDetailContainer = () => {
 
         getDoc(documentRef)
             .then(queryDocumentSnapshot => {
-                const fields = queryDocumentSnapshot.data()
-                const productAdapted = {id: queryDocumentSnapshot.id, ...fields}
+                const productAdapted = createProductsAdaptedFromFirestore(queryDocumentSnapshot)
                 setProduct(productAdapted)
             })
             .catch(error => {

@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { useCart } from "../../context/CartContext"
 import { useNotification } from "../notification/NotificationService"
+import { useCart } from "../../context/CartContext"
+import { Link } from "react-router-dom"
 
 const InputCount = ({onAdd, stock, initial= 1}) => {
     const [count, setCount] = useState(initial)
@@ -13,7 +14,7 @@ const InputCount = ({onAdd, stock, initial= 1}) => {
 
     return (
         <div>
-            <input type="number" onChange={handleChange} value={count} />
+            <input type='number' onChange={handleChange} value={count} />
             <button onClick={() => onAdd(count)}>Agregar al carrito</button>
         </div>
     )
@@ -44,20 +45,18 @@ const ButtonCount = ({onAdd, stock, initial = 1}) => {
 
 const ItemDetail = ({id, name, category, img, stock, price, description}) => {
     const [inputType, setInputType] = useState('button')
-    const [quantity, setQuantity] = useState(0)
-
-    const {isInCart} = useCart()
+    
+    const {addItem, isInCart} = useCart()
 
     const {showNotification} = useNotification()
     
-
     const ItemCount = inputType === 'input' ? InputCount : ButtonCount
 
-    const handleOnAdd = (count) => {
+    const handleOnAdd = (quantity) => {
         const objProducToadd = {
-            id, name, price, count
+            id, name, price, quantity
         }
-        console.log(objProducToadd) 
+        addItem(objProducToadd) 
         showNotification('success', `Se agrego correctamente ${name}`)
 
     }
@@ -92,7 +91,7 @@ const ItemDetail = ({id, name, category, img, stock, price, description}) => {
                     !isInCart(id) ? (
                         <ItemCount onAdd={handleOnAdd} stock={stock} />
                     ) : (
-                        <button>Finalizar Compra</button> 
+                        <Link to='/cart'>Finalizar Compra</Link>
                     )
                 }
             </footer>

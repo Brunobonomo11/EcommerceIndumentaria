@@ -16,7 +16,6 @@ export const CartProvider = ({children}) => {
         } else {
             console.error("El producto ya esta agregado")
         }
-
     }
 
     const isInCart = (productId) => {
@@ -48,7 +47,7 @@ export const CartProvider = ({children}) => {
         let accu = 0
  
         cart.forEach(prod => {
-            accu += prod.quantity * price
+            accu += prod.quantity * prod.price
         })
 
         return accu

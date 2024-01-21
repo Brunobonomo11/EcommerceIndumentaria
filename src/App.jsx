@@ -10,6 +10,8 @@ import FormWithValidationHOC from './Components/FormWithValidationHOC/FormWithVa
 import TaskFilterRenderProps from './Components/TaskFilterRenderProps/TaskFilterRenderProps'
 import { CartProvider } from './context/CartContext'
 import { NotificationProvider} from './Components/notification/NotificationService'
+import Checkout from './Components/Checkout/Checkout'
+
 
 
 const Layout = (props) => {
@@ -79,19 +81,17 @@ const OfertaLimitada = () => {
 }
 
 const App = () => {
+    const [cart, setCart] = useState([])
 
-  // const [cart, setCart] = useState([])
-  // console.log(cart)
+    const addItem = (productToAdd) => {
+      if(!isInCart(productToAdd.id)) {
+        setCart(prev => [...prev, productToAdd]);
+      } console.error('el producto ya esta agregado')
+    }
 
-  // const addItem = (productToAdd) => {
-  //   if(!isInCart(productToAdd.id)) {
-  //     setCart(prev => [...prev, productToAdd]);
-  //   }
-  // }
-
-  // const isInCart = (productId) => {
-  //   return cart.some(prod => prod.id === productId)
-  // }
+      const isInCart = (productId) => {
+        return cart.some(prod => prod.id === productId)
+      }
   
   return (
     <>
@@ -112,6 +112,7 @@ const App = () => {
                   <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos Filtrados'}/>}/>
                   <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
                   <Route path='/cart' element={<CartView />}/>
+                  <Route path='/checkout' element={<Checkout/>}/>
                   <Route path='*' element={<h1>404 Not Found</h1>}/>
             </Routes>
             <Button />
